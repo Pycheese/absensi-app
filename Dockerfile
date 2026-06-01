@@ -18,6 +18,9 @@ RUN npm ci
 RUN npm run build
 
 RUN php artisan optimize:clear
+RUN php artisan config:clear
+RUN php artisan route:clear
+RUN php artisan view:clear
 
 RUN mkdir -p storage/framework/sessions storage/framework/views storage/framework/cache storage/logs bootstrap/cache \
     && chmod -R 775 storage bootstrap/cache
