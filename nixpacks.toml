@@ -1,5 +1,5 @@
 [phases.setup]
-aptPkgs = ["...", "libpng-dev", "libjpeg-dev", "libfreetype6-dev"]
+aptPkgs = ["libpng-dev", "libjpeg-dev", "libfreetype6-dev"]
 
 [phases.install]
 cmds = [
