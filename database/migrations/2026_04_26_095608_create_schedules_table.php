@@ -8,27 +8,26 @@ return new class extends Migration {
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
 
-            $table->string('brand_name');
-            $table->string('session_name')->nullable();
+            $table->foreignId('brand_id')
+                ->constrained()
+                ->onDelete('cascade');
+
+            $table->string('session_name');
 
             $table->date('session_date');
 
             $table->time('start_time');
             $table->time('end_time');
 
-            $table->string('location')->nullable();
+            $table->string('location');
 
-            $table->foreignId('qr_code_id')
-                ->nullable()
-                ->constrained()
-                ->onDelete('cascade');
-
-            $table->boolean('is_active')->default(true);
+            $table->boolean('is_active')
+                ->default(true);
 
             $table->timestamps();
         });

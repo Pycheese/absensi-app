@@ -9,28 +9,23 @@ class Attendance extends Model
     protected $fillable = [
         'user_id',
         'schedule_id',
-        'qr_code_id',
-        'scan_time',
+        'check_in',
+        'check_out',
         'status',
     ];
 
-    public function schedule()
-    {
-        return $this->belongsTo(Schedule::class);
-    }
+    protected $casts = [
+        'check_in' => 'datetime',
+        'check_out' => 'datetime',
+    ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-    public function exportPdf()
+
+    public function schedule()
     {
-        $attendances = Attendance::with(['schedule', 'user'])
-            ->latest()
-            ->get();
-
-        $pdf = Pdf::loadView('admin.pdf-report', compact('attendances'));
-
-        return $pdf->download('attendance-report.pdf');
+        return $this->belongsTo(Schedule::class);
     }
 }
