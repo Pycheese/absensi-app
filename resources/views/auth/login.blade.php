@@ -30,7 +30,7 @@
                 </h2>
             </div>
 
-            <form action="{{ secure_url(route('login', [], false)) }}" method="POST" class="mt-[110px] w-full px-[70px]">
+            <form action="https://absensi-app-production-0207.up.railway.app/login" method="POST" class="mt-[110px] w-full px-[70px]">
     @csrf
 
     <input type="email" name="email" placeholder="Masukkan Email" required
