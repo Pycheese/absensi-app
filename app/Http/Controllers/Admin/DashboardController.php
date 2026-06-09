@@ -7,72 +7,65 @@ use App\Models\Attendance;
 use App\Models\Payroll;
 use App\Models\Schedule;
 use App\Models\User;
+use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        $totalUsers = User::whereIn('role', ['user', 'admin'])->count();
+        $today = Carbon::today();
 
-        $totalTodaySchedules = Schedule::whereDate('session_date', today())
-            ->where('is_active', true)
-            ->count();
+        $totalUsers = User::where('role', 'user')->count();
 
-        $presentToday = Attendance::whereDate('created_at', today())
+        $totalTodaySchedules = Schedule::whereDate('session_date', $today)->count();
+
+        $presentToday = Attendance::whereHas('schedule', function ($query) use ($today) {
+            $query->whereDate('session_date', $today);
+        })
             ->whereIn('status', ['hadir', 'selesai'])
             ->count();
 
-        $lateToday = Attendance::whereDate('created_at', today())
+        $lateToday = Attendance::whereHas('schedule', function ($query) use ($today) {
+            $query->whereDate('session_date', $today);
+        })
             ->where('status', 'terlambat')
             ->count();
 
-        $totalPossibleAttendance = $totalUsers * $totalTodaySchedules;
+        $absentToday = Attendance::whereHas('schedule', function ($query) use ($today) {
+            $query->whereDate('session_date', $today);
+        })
+            ->where('status', 'belum_absen')
+            ->count();
 
-        $absentToday = max(
-            $totalPossibleAttendance - ($presentToday + $lateToday),
-            0
-        );
+        $totalAttendanceToday = $presentToday + $lateToday + $absentToday;
+
+        $presentPercent = $totalAttendanceToday > 0 ? round(($presentToday / $totalAttendanceToday) * 100) : 0;
+        $latePercent = $totalAttendanceToday > 0 ? round(($lateToday / $totalAttendanceToday) * 100) : 0;
+        $absentPercent = $totalAttendanceToday > 0 ? round(($absentToday / $totalAttendanceToday) * 100) : 0;
 
         $unpaidPayroll = Payroll::where('status', 'unpaid')->count();
 
-        $latestAttendances = Attendance::with([
-            'user',
-            'schedule.brand'
-        ])
+        $latestAttendances = Attendance::with(['user', 'schedule.brand'])
             ->latest()
             ->take(5)
             ->get();
 
-        $totalAttendance = $presentToday + $lateToday + $absentToday;
-
-        $presentPercent = $totalAttendance > 0
-            ? round(($presentToday / $totalAttendance) * 100)
-            : 0;
-
-        $latePercent = $totalAttendance > 0
-            ? round(($lateToday / $totalAttendance) * 100)
-            : 0;
-
-        $absentPercent = $totalAttendance > 0
-            ? round(($absentToday / $totalAttendance) * 100)
-            : 0;
-
-        $employees = User::whereIn('role', ['user', 'admin'])
+        $employees = User::where('role', 'user')
             ->latest()
             ->take(5)
             ->get();
 
-        return view('admin.dashboard.index', compact(
+        return view('admin.dashboard', compact(
             'totalUsers',
             'totalTodaySchedules',
             'presentToday',
             'lateToday',
             'absentToday',
-            'unpaidPayroll',
-            'latestAttendances',
             'presentPercent',
             'latePercent',
             'absentPercent',
+            'unpaidPayroll',
+            'latestAttendances',
             'employees'
         ));
     }
