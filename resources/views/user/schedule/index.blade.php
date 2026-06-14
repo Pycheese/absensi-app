@@ -144,7 +144,7 @@
 
                     <div
                         class="w-16 h-16 rounded-2xl bg-[#EAF8FC] text-[#2FC3E6]
-                                                                                                                                                            mx-auto flex items-center justify-center mb-4">
+                                                                                                                                                                    mx-auto flex items-center justify-center mb-4">
 
                         <i class="bi bi-calendar-x text-3xl"></i>
 
