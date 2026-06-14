@@ -25,7 +25,7 @@
                         Jadwal sesi kamu
                     </p>
                 </div>
-                <a href="{{ route('schedule.calendar') }}"
+                <a href="{{ route('user.schedule.calendar') }}"
                     class="w-14 h-14 rounded-full bg-white/20 flex items-center justify-center mt-1 active:scale-95 transition">
                     <i class="bi bi-calendar3 text-white text-2xl"></i>
                 </a>
@@ -144,7 +144,7 @@
 
                     <div
                         class="w-16 h-16 rounded-2xl bg-[#EAF8FC] text-[#2FC3E6]
-                                                                                                                                                    mx-auto flex items-center justify-center mb-4">
+                                                                                                                                                            mx-auto flex items-center justify-center mb-4">
 
                         <i class="bi bi-calendar-x text-3xl"></i>
 
