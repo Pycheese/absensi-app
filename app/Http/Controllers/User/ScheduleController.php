@@ -17,8 +17,8 @@ class ScheduleController extends Controller
             ? Carbon::parse($request->date)
             : today();
 
-        $startCalendar = today();
-        $endCalendar = today()->copy()->addMonth();
+        $startCalendar = $selectedDate->copy()->startOfMonth();
+        $endCalendar = $selectedDate->copy()->endOfMonth();
 
         $calendarDays = collect();
 
