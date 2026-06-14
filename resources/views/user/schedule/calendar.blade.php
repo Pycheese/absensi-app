@@ -34,56 +34,39 @@
             </div>
 
             <div class="grid grid-cols-7 text-center text-[#0B2A5B] text-[14px] gap-y-5">
-                @php
-                    $selectedDay = request('date') 
-                        ? \Carbon\Carbon::parse(request('date'))->day 
-                        : 1;
+               @php
+    $months = [$firstMonth, $secondMonth];
+@endphp
 
-                    $days = [
-                        1,2,3,4,5,6,7,
-                        8,9,10,11,12,13,14,
-                        15,16,17,18,19,20,21,
-                        22,23,24,25,26,27,28,
-                        29,30,31
-                    ];
+@foreach ($months as $month)
+    <div class="mb-14">
+        <h2 class="text-[#0B2A5B] text-[18px] font-semibold mb-6">
+            {{ $month->translatedFormat('F Y') }}
+        </h2>
+
+        <div class="grid grid-cols-7 text-center text-[10px] text-gray-400 mb-4">
+            <div>MON</div>
+            <div>TUE</div>
+            <div>WED</div>
+            <div>THU</div>
+            <div>FRI</div>
+            <div>SAT</div>
+            <div>SUN</div>
+        </div>
+
+        <div class="grid grid-cols-7 text-center text-[#0B2A5B] text-[14px] gap-y-5">
+            @for ($day = 1; $day <= $month->daysInMonth; $day++)
+                @php
+                    $date = $month->copy()->day($day);
+                    $isSelected = $date->isSameDay($selectedDate);
                 @endphp
 
-                @foreach ($days as $day)
-                    <a href="{{ route('user.schedule.index', ['date' => '2026-06-' . str_pad($day, 2, '0', STR_PAD_LEFT)]) }}"
-                       class="mx-auto flex h-6 w-6 items-center justify-center rounded-full
-                       {{ $selectedDay == $day ? 'bg-[#2FC3E6] text-white' : 'text-[#0B2A5B]' }}">
-                        {{ $day }}
-                    </a>
-                @endforeach
-            </div>
+                <a href="{{ route('user.schedule.index', ['date' => $date->format('Y-m-d')]) }}"
+                   class="mx-auto flex h-6 w-6 items-center justify-center rounded-full
+                   {{ $isSelected ? 'bg-[#2FC3E6] text-white' : 'text-[#0B2A5B]' }}">
+                    {{ $day }}
+                </a>
+            @endfor
         </div>
-
-        {{-- Juli 2026 --}}
-        <div>
-            <h2 class="text-[#0B2A5B] text-[18px] font-semibold mb-6">
-                Juli 2026
-            </h2>
-
-            <div class="grid grid-cols-7 text-center text-[10px] text-gray-400 mb-4">
-                <div>MON</div>
-                <div>TUE</div>
-                <div>WED</div>
-                <div>THU</div>
-                <div>FRI</div>
-                <div>SAT</div>
-                <div>SUN</div>
-            </div>
-
-            <div class="grid grid-cols-7 text-center text-[#0B2A5B] text-[14px] gap-y-5">
-                @foreach (range(1, 31) as $day)
-                    <a href="{{ route('user.schedule.index', ['date' => '2026-07-' . str_pad($day, 2, '0', STR_PAD_LEFT)]) }}"
-                       class="mx-auto flex h-6 w-6 items-center justify-center rounded-full text-[#0B2A5B]">
-                        {{ $day }}
-                    </a>
-                @endforeach
-            </div>
-        </div>
-
     </div>
-</div>
-@endsection
+@endforeach
