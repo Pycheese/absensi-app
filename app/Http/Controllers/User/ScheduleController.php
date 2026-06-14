@@ -76,18 +76,13 @@ class ScheduleController extends Controller
             ? \Carbon\Carbon::parse(request('date'))
             : today();
 
-        $startCalendar = today()->startOfMonth();
-        $endCalendar = today()->copy()->addMonth()->endOfMonth();
-
-        $calendarDays = collect();
-
-        for ($date = $startCalendar->copy(); $date->lte($endCalendar); $date->addDay()) {
-            $calendarDays->push($date->copy());
-        }
+        $firstMonth = today()->startOfMonth();
+        $secondMonth = today()->copy()->addMonth()->startOfMonth();
 
         return view('user.schedule.calendar', compact(
-            'calendarDays',
-            'selectedDate'
+            'selectedDate',
+            'firstMonth',
+            'secondMonth'
         ));
     }
 }

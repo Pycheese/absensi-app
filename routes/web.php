@@ -92,7 +92,7 @@ Route::middleware(['auth'])->group(function () {
         ->name('notifications.index');
 
     Route::get('/schedule/calendar', [UserScheduleController::class, 'calendar'])
-        ->name('schedule.calendar');
+        ->name('user.schedule.calendar');
 
     Route::get('/history/calendar', [UserHistoryController::class, 'calendar'])
         ->name('history.calendar');
