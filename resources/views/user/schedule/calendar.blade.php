@@ -34,8 +34,8 @@
                                 $isSelected = $date->isSameDay($selectedDate);
                             @endphp
 
-                            <a href="{{ route('user.schedule.index', ['date' => $date->format('Y-m-d')]) }}" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full
-                                                   {{ $isSelected ? 'bg-[#2FC3E6] text-white' : 'text-[#0B2A5B]' }}">
+                            <a href="{{ route('schedule.index', ['date' => $date->format('Y-m-d')]) }}" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full
+                                                               {{ $isSelected ? 'bg-[#2FC3E6] text-white' : 'text-[#0B2A5B]' }}">
                                 {{ $day }}
                             </a>
                         @endforeach
