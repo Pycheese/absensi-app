@@ -9,15 +9,16 @@
         </div>
 
         <div class="bg-white min-h-[754px] rounded-t-[32px] px-7 pt-8 pb-28">
+
             @php
                 $months = [$firstMonth, $secondMonth];
                 $daysName = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
             @endphp
 
             @foreach ($months as $month)
-                <div class="mb-14">
+                <section class="mb-14">
                     <h2 class="text-[#0B2A5B] text-[18px] font-bold mb-7">
-                        {{ $month->translatedFormat('F Y') }}
+                        {{ $month->format('F Y') }}
                     </h2>
 
                     <div class="grid grid-cols-7 text-center text-[10px] text-gray-400 mb-6">
@@ -27,24 +28,21 @@
                     </div>
 
                     <div class="grid grid-cols-7 text-center text-[#0B2A5B] text-[14px] gap-y-5">
-                        @for ($i = 1; $i < $month->copy()->startOfMonth()->dayOfWeekIso; $i++)
-                            <div></div>
-                        @endfor
-
-                        @for ($day = 1; $day <= $month->daysInMonth; $day++)
+                        @foreach (range(1, $month->daysInMonth) as $day)
                             @php
                                 $date = $month->copy()->day($day);
                                 $isSelected = $date->isSameDay($selectedDate);
                             @endphp
 
                             <a href="{{ route('user.schedule.index', ['date' => $date->format('Y-m-d')]) }}" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full
-                                                               {{ $isSelected ? 'bg-[#2FC3E6] text-white' : 'text-[#0B2A5B]' }}">
+                                                   {{ $isSelected ? 'bg-[#2FC3E6] text-white' : 'text-[#0B2A5B]' }}">
                                 {{ $day }}
                             </a>
-                        @endfor
+                        @endforeach
                     </div>
-                </div>
+                </section>
             @endforeach
+
         </div>
 
     </div>
