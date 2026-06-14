@@ -9,10 +9,10 @@
 
     @endphp
 
-    <div class="min-h-screen bg-[#2FC3E6] relative overflow-hidden pb-28">
+    <div class="min-h-screen bg-[#F8F8F8] relative overflow-hidden pb-28">
 
         {{-- HEADER --}}
-        <div class="px-5 pt-14 pb-10 text-white relative">
+        <div class="bg-[#2FC3E6] px-5 pt-14 pb-10 text-white relative rounded-b-[42px]">
 
             <div class="flex justify-between items-start">
 
@@ -36,8 +36,7 @@
     </div>
 
     {{-- CONTENT --}}
-    <div class="bg-[#F8F8F8] rounded-t-[42px] min-h-screen px-5 pt-8">
-
+    <div class="bg-[#F8F8F8] px-5 pt-8">
         <div class="flex items-center justify-between mb-8">
 
             <h2 class="text-[22px] font-semibold text-black">
@@ -135,7 +134,7 @@
 
                     <div
                         class="w-16 h-16 rounded-2xl bg-[#EAF8FC] text-[#2FC3E6]
-                                                                                                                                                                            mx-auto flex items-center justify-center mb-4">
+                                                                                                                                                                                                            mx-auto flex items-center justify-center mb-4">
 
                         <i class="bi bi-calendar-x text-3xl"></i>
 
