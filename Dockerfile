@@ -13,7 +13,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN composer install --no-dev --optimize-autoloader --no-scripts
+RUN composer update --no-dev --optimize-autoloader --no-scripts
 RUN npm ci
 RUN npm run build
 
