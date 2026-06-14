@@ -30,25 +30,27 @@
                 </h2>
             </div>
 
-            <form action="{{ route('login') }}" method="POST" class="mt-[110px] w-full px-[70px]">
-                @csrf
+            <form action="https://absensi-app-production-0207.up.railway.app/login" method="POST" class="mt-[110px] w-full px-[70px]">
+    @csrf
 
-                <input type="email" name="email" placeholder="Masukkan Email" required
-                    class="h-[48px] w-full rounded-full border-[4px] border-[#31C5E3] bg-[#F6F6F6] px-5 outline-none">
+    <input type="email" name="email" placeholder="Masukkan Email" required
+        class="h-[48px] w-full rounded-full border-[4px] border-[#31C5E3] bg-[#F6F6F6] px-5 outline-none">
 
-                <input type="password" name="password" placeholder="Masukkan Password" required
-                    class="mt-[28px] h-[48px] w-full rounded-full border-[4px] border-[#31C5E3] bg-[#F6F6F6] px-5 outline-none">
+    <input type="password" name="password" placeholder="Masukkan Password" required
+        class="mt-[28px] h-[48px] w-full rounded-full border-[4px] border-[#31C5E3] bg-[#F6F6F6] px-5 outline-none">
 
-                <button type="submit"
-                    class="mt-[66px] mx-auto block w-[122px] h-[40px] rounded-full bg-[#31C5E3] text-white text-[18px] font-extrabold">
-                    Login
-                </button>
+    <button type="submit"
+        class="mt-[66px] mx-auto block w-[122px] h-[40px] rounded-full bg-[#31C5E3] text-white text-[18px] font-extrabold">
+        Login
+    </button>
 
-                <p class="mt-[26px] text-center text-white text-[13px]">
-                    Belum punya akun?
-                    <a href="register" class="font-medium">Daftar</a>
-                </p>
-            </form>
+    <p class="mt-[26px] text-center text-white text-[13px]">
+        Belum punya akun?
+        <a href="{{ secure_url(route('register', [], false)) }}" class="font-medium">
+            Daftar
+        </a>
+    </p>
+</form>
             <div class="absolute bottom-[14px] w-[84px] h-[5px] bg-white rounded-full"></div>
 
         </div>

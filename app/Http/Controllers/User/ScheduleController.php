@@ -70,10 +70,11 @@ class ScheduleController extends Controller
             'selectedDate'
         ));
     }
+
     public function calendar()
     {
         $selectedDate = request('date')
-            ? \Carbon\Carbon::parse(request('date'))
+            ? Carbon::parse(request('date'))
             : today();
 
         $firstMonth = today()->startOfMonth();
