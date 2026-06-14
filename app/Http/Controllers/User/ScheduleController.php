@@ -73,17 +73,6 @@ class ScheduleController extends Controller
 
     public function calendar()
     {
-        $selectedDate = request('date')
-            ? Carbon::parse(request('date'))
-            : today();
-
-        $firstMonth = today()->startOfMonth();
-        $secondMonth = today()->copy()->addMonth()->startOfMonth();
-
-        return view('user.schedule.calendar', compact(
-            'selectedDate',
-            'firstMonth',
-            'secondMonth'
-        ));
+        return 'TES CALENDAR AKTIF';
     }
 }
