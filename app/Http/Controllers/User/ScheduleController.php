@@ -70,24 +70,19 @@ class ScheduleController extends Controller
             'selectedDate'
         ));
     }
-    public function calendar()
-    {
-        $selectedDate = request('date')
-            ? \Carbon\Carbon::parse(request('date'))
-            : today();
+   public function calendar()
+{
+    $selectedDate = request('date')
+        ? \Carbon\Carbon::parse(request('date'))
+        : today();
 
-        $startCalendar = today()->startOfMonth();
-        $endCalendar = today()->copy()->addMonth()->endOfMonth();
+    $firstMonth = today()->startOfMonth();
+    $secondMonth = today()->copy()->addMonth()->startOfMonth();
 
-        $calendarDays = collect();
-
-        for ($date = $startCalendar->copy(); $date->lte($endCalendar); $date->addDay()) {
-            $calendarDays->push($date->copy());
-        }
-
-        return view('user.schedule.calendar', compact(
-            'calendarDays',
-            'selectedDate'
-        ));
-    }
+    return view('user.schedule.calendar', compact(
+        'selectedDate',
+        'firstMonth',
+        'secondMonth'
+    ));
+}
 }
