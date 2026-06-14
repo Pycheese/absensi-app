@@ -1,4 +1,4 @@
-FROM php:8.2-cli
+FROM php:8.3-apache
 
 RUN apt-get update && apt-get install -y \
     git unzip zip curl \
@@ -13,8 +13,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN composer update --no-dev --optimize-autoloader --no-scripts
-RUN npm ci
+RUN composer install --no-dev --optimize-autoloader --no-scripts
 RUN npm run build
 
 RUN php artisan optimize:clear
