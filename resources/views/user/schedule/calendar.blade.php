@@ -4,7 +4,7 @@
     <div class="min-h-screen bg-[#2FC3E6]">
 
         <div class="h-[120px] px-6 pt-10 flex items-center gap-5 text-white">
-            <a href="{{ route('user.schedule.index') }}" class="text-3xl font-bold">‹</a>
+            <a href="{{ route('schedule.index') }}" class="text-3xl font-bold">‹</a>
             <h1 class="text-[24px] font-bold">Choose Date</h1>
         </div>
 
@@ -34,8 +34,9 @@
                                 $isSelected = $date->isSameDay($selectedDate);
                             @endphp
 
-                            <a href="{{ route('schedule.index', ['date' => $date->format('Y-m-d')]) }}" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full
-                                                               {{ $isSelected ? 'bg-[#2FC3E6] text-white' : 'text-[#0B2A5B]' }}">
+                            <a href="{{ route('schedule.index', ['date' => $date->format('Y-m-d')]) }}"
+                                class="mx-auto flex h-7 w-7 items-center justify-center rounded-full
+                                                                           {{ $isSelected ? 'bg-[#2FC3E6] text-white' : 'text-[#0B2A5B]' }}">
                                 {{ $day }}
                             </a>
                         @endforeach
