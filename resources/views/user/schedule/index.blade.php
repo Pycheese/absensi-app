@@ -32,34 +32,13 @@
 
             </div>
 
-            {{-- DATE LIST --}}
-            <div class="flex gap-3 mt-10 overflow-x-auto no-scrollbar scroll-smooth pb-1 snap-x snap-mandatory">
-
-                @foreach ($calendarDays as $day)
-                        @php
-                            $isSelected = $selectedDate->isSameDay($day);
-                        @endphp
-
-                        <a href="{{ route('schedule.index', ['date' => $day->format('Y-m-d')]) }}" class="snap-start relative min-w-[74px] h-[104px]
-                       transition-all duration-200
-                       {{ $isSelected ? 'bg-white border border-[#1A3764]' : 'bg-white/20 border border-white/10' }}
-                       rounded-2xl shadow-sm flex flex-col items-center justify-center">
-
-                            @if ($isSelected)
-                                <span class="absolute -top-1 -right-1 w-4 h-4 bg-[#1A3764] rounded-full"></span>
-                            @endif
-
-                            <p class="text-[42px] leading-none font-light {{ $isSelected ? 'text-[#2FC3E6]' : 'text-white' }}">
-                                {{ $day->format('d') }}
-                            </p>
-
-                            <p class="text-sm mt-2 {{ $isSelected ? 'text-[#2FC3E6]' : 'text-white' }}">
-                                {{ $day->translatedFormat('D') }}
-                            </p>
-
-                        </a>
-                @endforeach
-
+            {{-- DATE BUTTON --}}
+            <div class="mt-10">
+                <a href="{{ route('user.schedule.calendar') }}"
+                    class="w-full h-14 rounded-2xl bg-white text-[#2FC3E6] font-semibold flex items-center justify-center gap-2">
+                    <i class="bi bi-calendar3 text-xl"></i>
+                    Pilih Tanggal
+                </a>
             </div>
         </div>
 
@@ -165,7 +144,7 @@
 
                     <div
                         class="w-16 h-16 rounded-2xl bg-[#EAF8FC] text-[#2FC3E6]
-                                                                                                                                            mx-auto flex items-center justify-center mb-4">
+                                                                                                                                                    mx-auto flex items-center justify-center mb-4">
 
                         <i class="bi bi-calendar-x text-3xl"></i>
 
