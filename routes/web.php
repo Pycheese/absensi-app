@@ -190,7 +190,7 @@ Route::middleware(['auth'])->group(function () {
         */
 
         Route::get('/schedules', [ScheduleController::class, 'index'])
-            ->name('schedules.index');
+            ->name('user.schedules.index');
 
         Route::get('/schedules/create', [ScheduleController::class, 'create'])
             ->name('schedules.create');

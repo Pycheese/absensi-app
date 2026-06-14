@@ -31,15 +31,6 @@
                 </a>
 
             </div>
-
-            {{-- DATE BUTTON --}}
-            <div class="mt-10">
-                <a href="{{ route('user.schedule.calendar') }}"
-                    class="w-full h-14 rounded-2xl bg-white text-[#2FC3E6] font-semibold flex items-center justify-center gap-2">
-                    <i class="bi bi-calendar3 text-xl"></i>
-                    Pilih Tanggal
-                </a>
-            </div>
         </div>
 
     </div>
@@ -144,7 +135,7 @@
 
                     <div
                         class="w-16 h-16 rounded-2xl bg-[#EAF8FC] text-[#2FC3E6]
-                                                                                                                                                                    mx-auto flex items-center justify-center mb-4">
+                                                                                                                                                                            mx-auto flex items-center justify-center mb-4">
 
                         <i class="bi bi-calendar-x text-3xl"></i>
 
