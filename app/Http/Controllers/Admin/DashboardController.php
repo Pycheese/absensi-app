@@ -39,17 +39,9 @@ class DashboardController extends Controller
 
         $totalAttendanceToday = $presentToday + $lateToday + $absentToday;
 
-        $presentPercent = $totalAttendanceToday > 0
-            ? round(($presentToday / $totalAttendanceToday) * 100)
-            : 0;
-
-        $latePercent = $totalAttendanceToday > 0
-            ? round(($lateToday / $totalAttendanceToday) * 100)
-            : 0;
-
-        $absentPercent = $totalAttendanceToday > 0
-            ? round(($absentToday / $totalAttendanceToday) * 100)
-            : 0;
+        $presentPercent = $totalAttendanceToday > 0 ? round(($presentToday / $totalAttendanceToday) * 100) : 0;
+        $latePercent = $totalAttendanceToday > 0 ? round(($lateToday / $totalAttendanceToday) * 100) : 0;
+        $absentPercent = $totalAttendanceToday > 0 ? round(($absentToday / $totalAttendanceToday) * 100) : 0;
 
         $weeklyPresent = Attendance::whereHas('schedule', function ($query) {
             $query->whereBetween('session_date', [
@@ -58,6 +50,24 @@ class DashboardController extends Controller
             ]);
         })
             ->whereIn('status', ['hadir', 'selesai'])
+            ->count();
+
+        $weeklyLate = Attendance::whereHas('schedule', function ($query) {
+            $query->whereBetween('session_date', [
+                now()->startOfWeek(),
+                now()->endOfWeek()
+            ]);
+        })
+            ->where('status', 'terlambat')
+            ->count();
+
+        $weeklyAbsent = Attendance::whereHas('schedule', function ($query) {
+            $query->whereBetween('session_date', [
+                now()->startOfWeek(),
+                now()->endOfWeek()
+            ]);
+        })
+            ->where('status', 'belum_absen')
             ->count();
 
         $unpaidPayroll = Payroll::where('status', 'unpaid')->count();
@@ -82,6 +92,8 @@ class DashboardController extends Controller
             'latePercent',
             'absentPercent',
             'weeklyPresent',
+            'weeklyLate',
+            'weeklyAbsent',
             'unpaidPayroll',
             'latestAttendances',
             'employees'
